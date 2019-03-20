@@ -1,0 +1,67 @@
+<!-- Tab content : Add Task started -->
+<div id="viewTask" class="container" style="font-size: 13px;">
+  <div class="row">&nbsp;</div>
+  <div class="row">
+      <div class="col-lg-2">Task : </div>
+      <div class="col-lg-4">
+              <input type="text" class="form-control" [(ngModel)]="task" (input)="search()" style="width: 100%;">
+      </div>
+      <div class="col-lg-2">Parent Task : </div>
+      <div class="col-lg-4">
+              <input type="text" class="form-control" [(ngModel)]="parentTask" (input)="search()" style="width: 100%;">
+      </div>
+  </div>
+  <div class="row">&nbsp;</div>
+  <div class="row">
+      <div class="col-lg-1" style="padding: 0px;">Priority From: </div>
+      <div class="col-lg-1">
+              <input type="text" class="form-control" [(ngModel)]="priorityFrom" (input)="search()" (keypress)="numberOnly($event)"  style="width: 100%;">
+      </div>
+      <div class="col-lg-1" style="padding: 0px;">Priority To: </div>
+      <div class="col-lg-1">
+              <input type="text" class="form-control" [(ngModel)]="priorityTo" (input)="search()" (keypress)="numberOnly($event)"  style="width: 100%;">
+      </div>
+      <div class="col-lg-1" style="padding: 0px;">Start Date: </div>
+      <div class="col-lg-3">
+              <input type="date" class="form-control" style="padding:0px;" [(ngModel)]="startDate" (input)="search()" style="width: 100%;">
+      </div>
+      <div class="col-lg-1" style="padding: 0px;">End Date: </div>
+      <div class="col-lg-3">
+              <input type="date" class="form-control" [(ngModel)]="endDate" (input)="search()" style="width: 100%;">
+      </div>
+  </div>
+ <!-- <button type="button" (click)="search()">Search</button> -->
+<div class="row">&nbsp;</div>
+  <div class="row">&nbsp;</div>
+  <div class="table-responsive" *ngIf="searchTableShow">          
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Parent</th>
+          <th>Priority</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let t of searchTaskArray; let i = index">
+          <td class="search-table-bg">{{t.task}}</td>
+          <td class="search-table-bg">{{t.parentTask}}</td>
+          <td>{{t.priority}}</td>
+          <td>{{t.startDate}}</td>
+          <td>{{t.endDate}}</td>
+          <td>
+            <button type="button" class="btn btn-warning" (click)="editTask(t.taskId)">Edit</button>
+            &nbsp;&nbsp;
+            <button type="button" class="btn btn-danger" (click)="deleteTask(t.taskId,t)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot *ngIf="searchTableFooterBoolean">
+          <tr><td colspan="6"><span style="margin-left: 40%;">No results found</span></td></tr>
+      </tfoot>
+    </table>
+  </div> 
+</div>
